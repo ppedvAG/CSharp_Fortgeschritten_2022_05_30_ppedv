@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprachfeatures", "Sprachfeatures\Sprachfeatures.csproj", "{051F4634-6426-4458-9B39-8D6263E1276A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegatesEvents", "DelegatesEvents\DelegatesEvents.csproj", "{6267D7F3-FD90-4634-8BA3-87D133C83DD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{051F4634-6426-4458-9B39-8D6263E1276A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{051F4634-6426-4458-9B39-8D6263E1276A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{051F4634-6426-4458-9B39-8D6263E1276A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6267D7F3-FD90-4634-8BA3-87D133C83DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6267D7F3-FD90-4634-8BA3-87D133C83DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6267D7F3-FD90-4634-8BA3-87D133C83DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6267D7F3-FD90-4634-8BA3-87D133C83DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
