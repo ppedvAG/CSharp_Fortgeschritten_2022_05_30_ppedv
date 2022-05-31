@@ -19,7 +19,7 @@ internal class GenericConstraints
 
 	public class DataStore6<T> where T : Delegate { } //Nur Delegate
 
-	public class DataStore7<T> where T : unmanaged { } //Nur Code von außen
+	public class DataStore7<T> where T : unmanaged { } //Bestimmte Typen, https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types
 
 	public class DataStore8<T1, T2> //Mehrere Constraints auf mehrere Generics
 		where T1 : class, new() //Mehrere Constraints auf T1

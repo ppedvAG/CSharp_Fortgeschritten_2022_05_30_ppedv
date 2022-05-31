@@ -15,6 +15,7 @@ internal class ActionFuncPredicate
 		Predicate<int> predicate = CheckForZero; //Predicate: Methode mit bool als return Wert und genau einem Parameter
 		predicate += CheckForOne;
 		bool b = predicate(0);
+		bool? b2 = predicate?.Invoke(0); //nullable boolean, da Invoke null zurück geben könnte
 
 		DoSomething(0, CheckForZero);
 		DoSomething(0, CheckForOne);
