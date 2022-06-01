@@ -12,7 +12,7 @@ public class LabCode
 	//8. Gib die Höchstgeschwindigkeit pro Anzahl Sitzplätze aus und sortiere nach Sitzanzahl (schnellster 4-, 5- und 6-Sitzer).
 	//9. Mische die Liste. Erstelle danach eine Erweiterungsmethode dafür.
 
-	static void Main2(string[] args)
+	static void Main(string[] args)
 	{
 		List<Fahrzeug> fahrzeuge = new List<Fahrzeug>
 		{
