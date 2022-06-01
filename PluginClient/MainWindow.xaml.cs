@@ -15,6 +15,7 @@ namespace PluginClient
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
+			//C:\Users\lk3\source\repos\CSharp_Fortgeschritten_2022_05_30\TestPlugin\bin\Debug\net6.0\TestPlugin.dll
 			string path = Path.Text;
 
 			Assembly loaded = Assembly.LoadFrom(path);
@@ -26,7 +27,19 @@ namespace PluginClient
 			{
 				Button b = new Button();
 				b.Content = mi.Name;
-				b.Click += (sender, e) => { component.GetType().GetMethod(mi.Name).Invoke(component, null); };
+				b.Click += (sender, e) =>
+				{
+					MethodInfo method = component.GetType().GetMethod(mi.Name);
+					if (method.GetParameters().Length == 0)
+						mi.Invoke(component, null);
+					else
+					{
+						ParameterInput pi = new ParameterInput(mi.GetParameters());
+						pi.ShowDialog();
+						object result = mi.Invoke(component, pi.ReturnValues.Values.ToArray());
+						MessageBox.Show(result.ToString());
+					}
+				};
 				ButtonPanel.Children.Add(b);
 			}
 		}
