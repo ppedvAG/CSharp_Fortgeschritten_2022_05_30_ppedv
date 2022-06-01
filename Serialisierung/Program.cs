@@ -83,6 +83,8 @@ namespace Serialisierung
 			TextFieldParser tfp = new TextFieldParser(filePath);
 			tfp.SetDelimiters(";");
 
+			string[] header = tfp.ReadFields(); //Header wenn existieren
+
 			List<Fahrzeug> csvRead = new();
 			while (!tfp.EndOfData)
 			{
