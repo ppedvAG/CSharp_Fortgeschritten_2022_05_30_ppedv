@@ -11,6 +11,7 @@ namespace AsyncAwaitUebung
 		public MainWindow() => InitializeComponent();
 
 		/*
+		 * http://bulk.openweathermap.org/sample/history.city.list.min.json.gz
 		 * JsonDocument.ParseAsync: Json Dokument einlesen und zu einem JsonDocument Objekt (jd) konvertieren
 		 * jd.RootElement.EnumerateArray(): Json Dokument zu einem Array von JsonElement Objekten konvertieren um es zu iterieren
 		 * jd.GetProperty(string): JsonProperty angreifen von einzelnem JsonElement
