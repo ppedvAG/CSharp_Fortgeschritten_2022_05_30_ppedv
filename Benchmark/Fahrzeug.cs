@@ -1,5 +1,6 @@
 ﻿namespace Benchmark;
 
+[Serializable]
 public class Fahrzeug
 {
 	public int ID;
