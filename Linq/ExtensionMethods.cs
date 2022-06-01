@@ -11,5 +11,10 @@
 		{
 			return int.Parse(s);
 		}
+
+		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
+		{
+			return list.OrderBy(e => Random.Shared.Next());
+		}
 	}
 }
