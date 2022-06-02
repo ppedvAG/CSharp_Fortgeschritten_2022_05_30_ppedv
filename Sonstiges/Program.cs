@@ -16,7 +16,6 @@ internal class Program
 		z[1].ToString();
 
 		var anonym = new { ID = 1, Name = "Test", b = false };
-		
 	}
 }
 

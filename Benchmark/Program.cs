@@ -1,11 +1,7 @@
-﻿using BenchmarkDotNet;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Newtonsoft.Json;
-using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Text.Json;
 using System.Xml.Serialization;
 
 namespace Benchmark;
@@ -21,12 +17,17 @@ public class Program
 	{
 		public List<Fahrzeug> Fahrzeuge;
 
-		public string FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Benchmark");
+		public string FolderPath;
 
 		[GlobalSetup]
-		public void SetupList()
+		public void Setup()
 		{
 			Fahrzeuge = new List<Fahrzeug>();
+			string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+			FolderPath = Path.Combine(desktop, "Benchmark");
+			if (!Directory.Exists("Benchmark"))
+				Directory.CreateDirectory(FolderPath);
+
 			Random rnd = new Random();
 			for (int i = 0; i < 50000; i++)
 				Fahrzeuge.Add(new Fahrzeug(i, rnd.Next(100, 500), (FahrzeugMarke) rnd.Next(0, 3)));
@@ -35,34 +36,46 @@ public class Program
 		[GlobalCleanup]
 		public void Cleanup()
 		{
-			Directory.Delete("Test", true);
+			Directory.Delete(FolderPath, true);
 		}
 
+		
 		[Benchmark]
+		[IterationCount(50)]
 		public void SystemJson()
 		{
-			using Stream s = new FileStream(Path.Combine(FolderPath, @"System.json"), FileMode.Open);
-			System.Text.Json.JsonSerializer.Serialize(s, Fahrzeuge);
+			string path = Path.Combine(FolderPath, @"System.json");
+			using Stream s = new FileStream(path, FileMode.Create);
+			System.Text.Json.JsonSerializerOptions options = new System.Text.Json.JsonSerializerOptions();
+			options.IncludeFields = true;
+			System.Text.Json.JsonSerializer.Serialize(s, Fahrzeuge, options);
 		}
 
 		[Benchmark]
+		[IterationCount(50)]
 		public void NewtonsoftJson()
 		{
 			string json = JsonConvert.SerializeObject(Fahrzeuge);
+			string path = Path.Combine(FolderPath, @"Newtonsoft.json");
+			File.WriteAllText(path, json);
 		}
 
 		[Benchmark]
+		[IterationCount(50)]
 		public void Xml()
 		{
-			using Stream s = new FileStream(Path.Combine(FolderPath, @"Xml.xml"), FileMode.Open);
-			XmlSerializer xml = new XmlSerializer(typeof(Fahrzeug));
+			string path = Path.Combine(FolderPath, @"Xml.xml");
+			using Stream s = new FileStream(path, FileMode.Create);
+			XmlSerializer xml = new XmlSerializer(typeof(List<Fahrzeug>));
 			xml.Serialize(s, Fahrzeuge);
 		}
 
 		[Benchmark]
+		[IterationCount(50)]
 		public void Binary()
 		{
-			using Stream s = new FileStream(Path.Combine(FolderPath, @"Binary.bin"), FileMode.Open);
+			string path = Path.Combine(FolderPath, @"Binary.bin");
+			using Stream s = new FileStream(path, FileMode.Create);
 			BinaryFormatter formatter = new BinaryFormatter();
 			formatter.Serialize(s, Fahrzeuge);
 		}

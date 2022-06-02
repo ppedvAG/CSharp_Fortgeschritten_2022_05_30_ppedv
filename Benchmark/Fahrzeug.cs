@@ -1,11 +1,19 @@
-﻿namespace Benchmark;
+﻿using System.Xml.Serialization;
+
+namespace Benchmark;
 
 [Serializable]
 public class Fahrzeug
 {
+	[XmlAttribute]
 	public int ID;
+
+	[XmlAttribute]
 	public int MaxGeschwindigkeit;
+
+	[XmlAttribute]
 	public FahrzeugMarke Marke;
+
 	public List<Sitzplatz> Sitze;
 
 	public Fahrzeug(int id, int v, FahrzeugMarke fm)
@@ -27,11 +35,17 @@ public class Fahrzeug
 		for (int i = 0; i < v % (sitze + 1); i++)
 			Sitze[i].IstBesetzt = true;
 	}
+
+	public Fahrzeug() { }
 }
 
-public record Sitzplatz
+[Serializable]
+public class Sitzplatz
 {
+	[XmlAttribute]
 	public bool IstBesetzt;
+
+	public Sitzplatz() { }
 }
 
 public enum FahrzeugMarke
