@@ -14,6 +14,7 @@ internal class Program
 		}
 
 		z[1].ToString();
+		z[3, "Rot"].ToString();
 
 		var anonym = new { ID = 1, Name = "Test", b = false };
 	}
@@ -42,6 +43,8 @@ public class Zug : IEnumerable
 		get => Wagons[idx];
 		set => Wagons[idx] = value;
 	}
+
+	public Wagon this[int sitze, string farbe] => Wagons.First(e => e.Sitzplätze == sitze && e.Farbe == farbe);
 }
 
 public class Wagon
