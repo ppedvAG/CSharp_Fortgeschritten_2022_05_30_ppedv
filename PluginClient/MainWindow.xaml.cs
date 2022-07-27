@@ -30,8 +30,13 @@ namespace PluginClient
 				b.Click += (sender, e) =>
 				{
 					MethodInfo method = component.GetType().GetMethod(mi.Name);
-					if (method.GetParameters().Length == 0)
+					if (!method.GetParameters().Any() && method.ReturnType == typeof(void))
 						mi.Invoke(component, null);
+					else if (!method.GetParameters().Any() && method.ReturnType != typeof(void))
+					{
+						object x = mi.Invoke(component, null);
+						Convert.ChangeType(x, method.ReturnType);
+					}
 					else
 					{
 						ParameterInput pi = new ParameterInput(mi.GetParameters());
